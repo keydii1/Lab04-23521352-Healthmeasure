@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Health measure</string>
+    <string name="heart_rate_format">❤️ %d bpm</string>
+    <string name="calories_format">🔥 %d cal</string>
+    <string name="distance_format">📈 %.2f km</string>
+    <string name="time_format">⏱ %02d:%02d</string>
+    <string name="btn_start">START</string>
+    <string name="btn_end">END</string>
+    <string name="btn_pause">PAUSE</string>
+    <string name="btn_resume">RESUME</string>
+    <string name="error_registration">Lỗi đăng ký theo dõi: %s</string>
+    <string name="error_start">Không thể bắt đầu: %s</string>
+</resources>

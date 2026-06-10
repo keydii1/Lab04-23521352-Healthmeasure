@@ -181,7 +181,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="4dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -208,7 +208,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginHorizontal="4dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -224,6 +224,33 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:hint="65"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#55FFFFFF"
+                            android:textSize="14sp"
+                            android:backgroundTint="#88FFFFFF"/>
+                    </LinearLayout>
+
+                    <!-- Height Input -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Height (cm)"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="11sp" />
+
+                        <EditText
+                            android:id="@+id/etProfileHeight"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="170"
                             android:textColor="#FFFFFF"
                             android:textColorHint="#55FFFFFF"
                             android:textSize="14sp"
@@ -291,6 +318,16 @@
                             android:backgroundTint="#88FFFFFF"/>
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvBmiStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="BMI: --"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnSaveProfile"

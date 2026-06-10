@@ -231,6 +231,67 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <!-- Distance Target Input -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/target_distance"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="11sp" />
+
+                        <EditText
+                            android:id="@+id/etTargetDistance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="5.0"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#55FFFFFF"
+                            android:textSize="14sp"
+                            android:backgroundTint="#88FFFFFF"/>
+                    </LinearLayout>
+
+                    <!-- Calories Target Input -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/target_calories"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="11sp" />
+
+                        <EditText
+                            android:id="@+id/etTargetCalories"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:hint="300"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#55FFFFFF"
+                            android:textSize="14sp"
+                            android:backgroundTint="#88FFFFFF"/>
+                    </LinearLayout>
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/btnSaveProfile"
                     android:layout_width="wrap_content"

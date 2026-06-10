@@ -196,9 +196,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Bind stats to UI
-        tvWeeklyDistance.text = String.format(Locale.getDefault(), "%.2f km", totalDistance)
-        tvWeeklyCalories.text = String.format(Locale.getDefault(), "%d kcal", totalCalories)
+        // Bind stats to UI with weekly target comparison (Daily target * 7)
+        val weeklyDistTarget = profileHelper.targetDistanceKm * 7
+        val weeklyCalTarget = profileHelper.targetCaloriesKcal * 7
+
+        tvWeeklyDistance.text = String.format(Locale.getDefault(), "%.2f / %.1f km", totalDistance, weeklyDistTarget)
+        tvWeeklyCalories.text = String.format(Locale.getDefault(), "%d / %d kcal", totalCalories, weeklyCalTarget)
 
         val hours = totalSeconds / 3600
         val mins = (totalSeconds % 3600) / 60

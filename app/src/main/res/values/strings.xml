@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Health measure</string>
+    <string name="app_name">Health Tracker</string>
     <string name="heart_rate_format">❤️ %d bpm</string>
-    <string name="calories_format">🔥 %d cal</string>
+    <string name="calories_format">🔥 %d kcal</string>
     <string name="distance_format">📈 %.2f km</string>
     <string name="time_format">⏱ %02d:%02d</string>
     <string name="btn_start">START</string>
@@ -10,4 +10,46 @@
     <string name="btn_resume">RESUME</string>
     <string name="error_registration">Lỗi đăng ký theo dõi: %s</string>
     <string name="error_start">Không thể bắt đầu: %s</string>
+
+    <!-- Additional Strings for Premium UI -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_history">History</string>
+    <string name="nav_settings">Profile</string>
+    
+    <string name="dashboard_title">Health Dashboard</string>
+    <string name="dashboard_welcome">Hello Champion!</string>
+    <string name="dashboard_tagline">Keep pushing your physical limits.</string>
+    
+    <string name="stat_weekly_total">WEEKLY PROGRESS</string>
+    <string name="stat_distance">Total Distance</string>
+    <string name="stat_calories">Total Calories</string>
+    <string name="stat_duration">Total Active Time</string>
+    <string name="stat_workouts">Workouts Done</string>
+    
+    <string name="history_title">Workout History</string>
+    <string name="history_empty">No workouts tracked yet. Time to sweat!</string>
+    <string name="history_clear_all">Clear All History</string>
+    <string name="history_clear_confirm">Are you sure you want to clear all workout history?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    
+    <string name="settings_title">User Profile &amp; Settings</string>
+    <string name="profile_age">Age (years)</string>
+    <string name="profile_weight">Weight (kg)</string>
+    <string name="profile_save">Save Profile</string>
+    <string name="profile_saved_success">Profile updated successfully!</string>
+    <string name="settings_targets">Target Goals</string>
+    <string name="target_distance">Daily Distance Target (km)</string>
+    <string name="target_calories">Daily Calories Target (kcal)</string>
+
+    <string name="workout_summary_title">Workout Summary</string>
+    <string name="workout_summary_desc">Great job! Here are your workout statistics.</string>
+    <string name="workout_saved">Workout saved successfully!</string>
+    <string name="avg_hr_label">Average HR</string>
+    <string name="max_hr_label">Max HR</string>
+    <string name="speed_label">Average Pace</string>
+    
+    <string name="permission_title">Permissions Required</string>
+    <string name="permission_desc">To track your heart rate, distance, and calories accurately, this app needs body sensors and activity permissions.</string>
+    <string name="btn_grant">Grant Permissions</string>
 </resources>

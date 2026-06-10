@@ -2,6 +2,8 @@ package com.example.healthmeasure
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -35,12 +37,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvBmiStatus: TextView
     private lateinit var btnSaveProfile: Button
 
+    private lateinit var etHistorySearch: EditText
     private lateinit var rvWorkoutHistory: RecyclerView
     private lateinit var layoutEmptyState: LinearLayout
     private lateinit var tvClearAllHistory: TextView
     private lateinit var btnStartWorkout: Button
 
     private lateinit var adapter: WorkoutAdapter
+    private var allWorkoutsList: List<WorkoutSession> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +76,8 @@ class MainActivity : AppCompatActivity() {
         tvBmiStatus = findViewById(R.id.tvBmiStatus)
         btnSaveProfile = findViewById(R.id.btnSaveProfile)
 
-        // Bind history and button Views
+        // Bind history search, recycler, and button Views
+        etHistorySearch = findViewById(R.id.etHistorySearch)
         rvWorkoutHistory = findViewById(R.id.rvWorkoutHistory)
         layoutEmptyState = findViewById(R.id.layoutEmptyState)
         tvClearAllHistory = findViewById(R.id.tvClearAllHistory)
@@ -94,12 +99,22 @@ class MainActivity : AppCompatActivity() {
         tvClearAllHistory.setOnClickListener {
             confirmClearAllHistory()
         }
+
+        // Setup History search filter text watcher
+        etHistorySearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterHistory(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     override fun onResume() {
         super.onResume()
         loadWorkoutsAndStats()
         updateBmiDisplay()
+        etHistorySearch.setText("") // Clear filter on resume
     }
 
     private fun setupProfileView() {
@@ -170,18 +185,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadWorkoutsAndStats() {
-        val workouts = dbHelper.getAllSessions()
+        allWorkoutsList = dbHelper.getAllSessions()
         
         // Update History RecyclerView
-        if (workouts.isEmpty()) {
+        if (allWorkoutsList.isEmpty()) {
             layoutEmptyState.visibility = View.VISIBLE
             rvWorkoutHistory.visibility = View.GONE
             tvClearAllHistory.visibility = View.GONE
+            etHistorySearch.visibility = View.GONE
         } else {
             layoutEmptyState.visibility = View.GONE
             rvWorkoutHistory.visibility = View.VISIBLE
             tvClearAllHistory.visibility = View.VISIBLE
-            adapter.updateData(workouts)
+            etHistorySearch.visibility = View.VISIBLE
+            adapter.updateData(allWorkoutsList)
         }
 
         // Calculate Weekly Statistics
@@ -191,7 +208,7 @@ class MainActivity : AppCompatActivity() {
 
         // Look at workouts from the last 7 days (or just sum total recorded for simplicity)
         val cutoffTime = System.currentTimeMillis() - (7 * 24 * 60 * 60 * 1000)
-        for (w in workouts) {
+        for (w in allWorkoutsList) {
             if (w.timestamp >= cutoffTime) {
                 totalDistance += w.distanceKm
                 totalCalories += w.calories
@@ -219,6 +236,25 @@ class MainActivity : AppCompatActivity() {
         } else {
             "Keep pushing your physical limits."
         }
+    }
+
+    private fun filterHistory(query: String) {
+        if (query.isBlank()) {
+            adapter.updateData(allWorkoutsList)
+            return
+        }
+
+        val parsedQuery = query.toDoubleOrNull()
+        val filtered = allWorkoutsList.filter { workout ->
+            if (parsedQuery != null) {
+                // If it is a number, filter by workouts that have at least that distance or calories
+                workout.distanceKm >= parsedQuery || workout.calories >= parsedQuery
+            } else {
+                // Check if string contains or matches (e.g. date formatting or other metadata, let's match default)
+                false
+            }
+        }
+        adapter.updateData(filtered)
     }
 
     private fun deleteWorkoutSession(session: WorkoutSession) {

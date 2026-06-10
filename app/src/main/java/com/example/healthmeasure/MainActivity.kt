@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var etProfileAge: EditText
     private lateinit var etProfileWeight: EditText
+    private lateinit var etProfileHeight: EditText
+    private lateinit var etTargetDistance: EditText
+    private lateinit var etTargetCalories: EditText
+    private lateinit var tvBmiStatus: TextView
     private lateinit var btnSaveProfile: Button
 
     private lateinit var rvWorkoutHistory: RecyclerView
@@ -60,6 +64,10 @@ class MainActivity : AppCompatActivity() {
         // Bind profile settings Views
         etProfileAge = findViewById(R.id.etProfileAge)
         etProfileWeight = findViewById(R.id.etProfileWeight)
+        etProfileHeight = findViewById(R.id.etProfileHeight)
+        etTargetDistance = findViewById(R.id.etTargetDistance)
+        etTargetCalories = findViewById(R.id.etTargetCalories)
+        tvBmiStatus = findViewById(R.id.tvBmiStatus)
         btnSaveProfile = findViewById(R.id.btnSaveProfile)
 
         // Bind history and button Views
@@ -89,36 +97,65 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         loadWorkoutsAndStats()
+        updateBmiDisplay()
     }
 
     private fun setupProfileView() {
         etProfileAge.setText(profileHelper.age.toString())
         etProfileWeight.setText(profileHelper.weight.toString())
+        etProfileHeight.setText(profileHelper.heightCm.toString())
+        etTargetDistance.setText(String.format(Locale.getDefault(), "%.1f", profileHelper.targetDistanceKm))
+        etTargetCalories.setText(profileHelper.targetCaloriesKcal.toString())
+        updateBmiDisplay()
+    }
+
+    private fun updateBmiDisplay() {
+        val bmiVal = profileHelper.bmi
+        val category = profileHelper.bmiCategory
+        if (bmiVal > 0) {
+            tvBmiStatus.text = String.format(Locale.getDefault(), "BMI: %.1f (%s)", bmiVal, category)
+        } else {
+            tvBmiStatus.text = "BMI: --"
+        }
     }
 
     private fun saveUserProfile() {
         val ageStr = etProfileAge.text.toString().trim()
         val weightStr = etProfileWeight.text.toString().trim()
+        val heightStr = etProfileHeight.text.toString().trim()
+        val distStr = etTargetDistance.text.toString().trim()
+        val calStr = etTargetCalories.text.toString().trim()
 
-        if (ageStr.isEmpty() || weightStr.isEmpty()) {
-            Toast.makeText(this, "Please fill in age and weight", Toast.LENGTH_SHORT).show()
+        if (ageStr.isEmpty() || weightStr.isEmpty() || heightStr.isEmpty() || distStr.isEmpty() || calStr.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         val age = ageStr.toIntOrNull()
         val weight = weightStr.toIntOrNull()
+        val height = heightStr.toIntOrNull()
+        val dist = distStr.toFloatOrNull()
+        val cal = calStr.toIntOrNull()
 
-        if (age == null || age <= 0 || weight == null || weight <= 0) {
+        if (age == null || age <= 0 || weight == null || weight <= 0 || height == null || height <= 0 || dist == null || dist <= 0 || cal == null || cal <= 0) {
             Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
             return
         }
 
         profileHelper.age = age
         profileHelper.weight = weight
+        profileHelper.heightCm = height
+        profileHelper.targetDistanceKm = dist
+        profileHelper.targetCaloriesKcal = cal
+
+        updateBmiDisplay()
 
         Toast.makeText(this, getString(R.string.profile_saved_success), Toast.LENGTH_SHORT).show()
         etProfileAge.clearFocus()
         etProfileWeight.clearFocus()
+        etProfileHeight.clearFocus()
+        etTargetDistance.clearFocus()
+        etTargetCalories.clearFocus()
     }
 
     private fun setupHistoryRecyclerView() {

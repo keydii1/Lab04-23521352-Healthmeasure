@@ -378,6 +378,24 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
+            <!-- Search History Input -->
+            <EditText
+                android:id="@+id/etHistorySearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/card_bg"
+                android:hint="Search history (e.g. 5.0 or 300)"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#55FFFFFF"
+                android:textSize="13sp"
+                android:padding="12dp"
+                android:inputType="text"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:drawablePadding="8dp"
+                android:backgroundTint="#00000000" />
+
             <!-- Empty State View -->
             <LinearLayout
                 android:id="@+id/layoutEmptyState"

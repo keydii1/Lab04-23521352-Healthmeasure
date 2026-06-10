@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">Theo dõi Sức khỏe</string>
+    <string name="heart_rate_format">❤️ %d bpm</string>
+    <string name="calories_format">🔥 %d kcal</string>
+    <string name="distance_format">📈 %.2f km</string>
+    <string name="time_format">⏱ %02d:%02d</string>
+    <string name="btn_start">BẮT ĐẦU</string>
+    <string name="btn_end">KẾT THÚC</string>
+    <string name="btn_pause">TẠM DỪNG</string>
+    <string name="btn_resume">TIẾP TỤC</string>
+    <string name="error_registration">Lỗi đăng ký theo dõi: %s</string>
+    <string name="error_start">Không thể bắt đầu: %s</string>
+
+    <!-- Additional Strings for Premium UI -->
+    <string name="nav_dashboard">Bảng tin</string>
+    <string name="nav_history">Lịch sử</string>
+    <string name="nav_settings">Hồ sơ</string>
+    
+    <string name="dashboard_title">Bảng tin Sức khỏe</string>
+    <string name="dashboard_welcome">Chào Nhà Vô Địch!</string>
+    <string name="dashboard_tagline">Hãy tiếp tục vượt qua giới hạn của bạn.</string>
+    
+    <string name="stat_weekly_total">TIẾN TRÌNH TUẦN NÀY</string>
+    <string name="stat_distance">Tổng Quãng Đường</string>
+    <string name="stat_calories">Tổng Calo Tiêu Thụ</string>
+    <string name="stat_duration">Tổng Thời Gian Hoạt Động</string>
+    <string name="stat_workouts">Số Lần Luyện Tập</string>
+    
+    <string name="history_title">Lịch Sử Luyện Tập</string>
+    <string name="history_empty">Chưa có bài tập nào được ghi lại. Hãy bắt đầu thôi!</string>
+    <string name="history_clear_all">Xóa Toàn Bộ Lịch Sử</string>
+    <string name="history_clear_confirm">Bạn có chắc chắn muốn xóa toàn bộ lịch sử luyện tập không?</string>
+    <string name="dialog_yes">Có</string>
+    <string name="dialog_no">Không</string>
+    
+    <string name="settings_title">Hồ Sơ &amp; Cài Đặt</string>
+    <string name="profile_age">Tuổi (năm)</string>
+    <string name="profile_weight">Cân nặng (kg)</string>
+    <string name="profile_save">Lưu Hồ Sơ</string>
+    <string name="profile_saved_success">Hồ sơ đã được cập nhật thành công!</string>
+    <string name="settings_targets">Mục Tiêu</string>
+    <string name="target_distance">Mục tiêu quãng đường ngày (km)</string>
+    <string name="target_calories">Mục tiêu lượng calo ngày (kcal)</string>
+
+    <string name="workout_summary_title">Tóm Tắt Bài Tập</string>
+    <string name="workout_summary_desc">Làm tốt lắm! Đây là thống kê bài tập của bạn.</string>
+    <string name="workout_saved">Bài tập đã được lưu thành công!</string>
+    <string name="avg_hr_label">Nhịp tim TB</string>
+    <string name="max_hr_label">Nhịp tim tối đa</string>
+    <string name="speed_label">Nhịp độ TB</string>
+    
+    <string name="permission_title">Yêu Cầu Cấp Quyền</string>
+    <string name="permission_desc">Để theo dõi chính xác nhịp tim, quãng đường và lượng calo của bạn, ứng dụng cần các quyền cảm biến cơ thể và hoạt động.</string>
+    <string name="btn_grant">Cấp Quyền Ngay</string>
+</resources>

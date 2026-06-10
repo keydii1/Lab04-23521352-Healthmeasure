@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Basic Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Dark Mode Palette -->
+    <color name="bg_dark">#121212</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="surface_dark_card">#2C2C2C</color>
+    
+    <!-- Brand / Theme Colors -->
+    <color name="color_primary">#FF6F00</color>
+    <color name="color_primary_light">#FFE082</color>
+    <color name="color_primary_dark">#E65100</color>
+    <color name="color_accent">#00B0FF</color>
+    <color name="color_accent_light">#E0F7FA</color>
+
+    <!-- Metric Specific Colors -->
+    <color name="metric_heart_rate">#FF3366</color>
+    <color name="metric_calories">#FF5722</color>
+    <color name="metric_distance">#2196F3</color>
+    <color name="metric_time">#FFC107</color>
+    
+    <!-- State Colors -->
+    <color name="state_active">#4CAF50</color>
+    <color name="state_paused">#FFEB3B</color>
+    <color name="state_idle">#9E9E9E</color>
+
+    <!-- Gradients -->
+    <color name="gradient_start">#FF4E50</color>
+    <color name="gradient_end">#F9D423</color>
+    <color name="gradient_blue_start">#00c6ff</color>
+    <color name="gradient_blue_end">#0072ff</color>
 </resources>

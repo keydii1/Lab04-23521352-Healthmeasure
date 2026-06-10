@@ -140,17 +140,25 @@ class HealthActivity : AppCompatActivity() {
 
                     tvHeartRate.text = String.format(Locale.getDefault(), "%d bpm", hr)
                     
-                    // Display Heart Rate Zone
-                    val zone = profileHelper.getHeartRateZone(hr)
-                    tvHeartZone.text = zone
-                    tvHeartZone.visibility = android.view.View.VISIBLE
+                    // Display Heart Rate Zone or High Alert Warning
+                    val maxHR = profileHelper.maxHeartRate
+                    if (hr >= maxHR * 0.95) {
+                        tvHeartZone.text = "⚠️ WARNING"
+                        tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_heart_rate))
+                        tvHeartZone.visibility = android.view.View.VISIBLE
+                        triggerWarningFeedback()
+                    } else {
+                        val zone = profileHelper.getHeartRateZone(hr)
+                        tvHeartZone.text = zone
+                        tvHeartZone.visibility = android.view.View.VISIBLE
 
-                    // Update status text colors or background based on zone
-                    when (zone) {
-                        "Peak Zone" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_heart_rate))
-                        "Cardio" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_calories))
-                        "Fat Burn" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.state_active))
-                        else -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_distance))
+                        // Update status text colors or background based on zone
+                        when (zone) {
+                            "Peak Zone" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_heart_rate))
+                            "Cardio" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_calories))
+                            "Fat Burn" -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.state_active))
+                            else -> tvHeartZone.setBackgroundColor(ContextCompat.getColor(this@HealthActivity, R.color.metric_distance))
+                        }
                     }
 
                     // Animate Heart Pulse
@@ -405,6 +413,35 @@ class HealthActivity : AppCompatActivity() {
             toneGenerator.startTone(ToneGenerator.TONE_PROP_ACK, 120)
         } catch (e: Exception) {
             // Ignore tone errors
+        }
+    }
+
+    private fun triggerWarningFeedback() {
+        // Double vibrate and beep for safety warnings
+        try {
+            val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                val vibratorManager = getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                vibratorManager.defaultVibrator
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createWaveform(longArrayOf(0, 150, 100, 150), -1))
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(longArrayOf(0, 150, 100, 150), -1)
+            }
+        } catch (e: Exception) {
+            // Ignore vibrator
+        }
+
+        try {
+            val toneGenerator = ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100)
+            toneGenerator.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 300)
+        } catch (e: Exception) {
+            // Ignore audio
         }
     }
 

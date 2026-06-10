@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvWeeklyDistance: TextView
     private lateinit var tvWeeklyCalories: TextView
     private lateinit var tvWeeklyTime: TextView
+    private lateinit var tvWelcomeTagline: TextView
 
     private lateinit var etProfileAge: EditText
     private lateinit var etProfileWeight: EditText
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         tvWeeklyDistance = findViewById(R.id.tvWeeklyDistance)
         tvWeeklyCalories = findViewById(R.id.tvWeeklyCalories)
         tvWeeklyTime = findViewById(R.id.tvWeeklyTime)
+        tvWelcomeTagline = findViewById(R.id.tvWelcomeTagline)
 
         // Bind profile settings Views
         etProfileAge = findViewById(R.id.etProfileAge)
@@ -149,6 +151,7 @@ class MainActivity : AppCompatActivity() {
         profileHelper.targetCaloriesKcal = cal
 
         updateBmiDisplay()
+        loadWorkoutsAndStats() // Refresh tagline based on new targets
 
         Toast.makeText(this, getString(R.string.profile_saved_success), Toast.LENGTH_SHORT).show()
         etProfileAge.clearFocus()
@@ -206,6 +209,16 @@ class MainActivity : AppCompatActivity() {
         val hours = totalSeconds / 3600
         val mins = (totalSeconds % 3600) / 60
         tvWeeklyTime.text = String.format(Locale.getDefault(), "%02dh %02dm", hours, mins)
+
+        // Calculate and update goal achievement percentage
+        val distProgress = if (weeklyDistTarget > 0) (totalDistance / weeklyDistTarget) * 100 else 0.0
+        val calProgress = if (weeklyCalTarget > 0) (totalCalories.toDouble() / weeklyCalTarget) * 100 else 0.0
+        val totalProgress = ((distProgress + calProgress) / 2).toInt()
+        tvWelcomeTagline.text = if (totalProgress > 0) {
+            "You have achieved $totalProgress% of your weekly goals! Keep it up!"
+        } else {
+            "Keep pushing your physical limits."
+        }
     }
 
     private fun deleteWorkoutSession(session: WorkoutSession) {
